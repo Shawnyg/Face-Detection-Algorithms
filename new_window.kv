@@ -1,0 +1,111 @@
+#:kivy 2.0
+WindowManager:
+    MainWindow:
+    HelpWindow:
+    MTCNNWindow:
+    HaarWindow:
+    RetinaWindow:
+
+<MainWindow>:
+
+    canvas.before:
+        Color:
+            rgba: (33/255,166/255,166/255,1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    name: "Main"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Label:
+            id: mainlabel_id
+            text: "Select an algorithm below"
+            font_size: 32
+        Spinner:
+            id: spinner_id
+            text: "Choose Algorithm"
+            values: ["MTCNN", "RetinaFace", "Haar-Cascade"]
+            background_color: (33/255,166/255,166/255,1)
+
+            #on_text: root.spinner_clicked(spinner_id.text)
+        Spinner:
+            id: spinner_id2
+            text: "Choose Mode"
+            values: ["Single Image", "Folder of Images", "Live"]
+            background_color: (33/255,166/255,166/255,1)
+
+            #on_text: root.spinner_clicked(spinner_id2.text)
+        Button:
+            text: "Continue"
+            font_size: 32
+            background_color: (0/255,145/255,61/255,1)
+            background_normal: ''
+
+            on_release:
+                app.root.current = "Help"
+                root.manager.transition.direction = "left"
+
+
+<HelpWindow>:
+    name: "Help"
+
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Label:
+            text: "Help Screen"
+            font_size: 32
+        
+        Button:
+            text: "Next Screen"
+            font_size: 32
+            on_release: app.root.current = "MTCNN"
+<MTCNNWindow>:
+    name: "MTCNN"
+    
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Label:
+            text: "MTCNN Screen"
+            font_size: 32
+            
+        Button:
+            text: "Next Screen"
+            font_size: 32
+            on_release: app.root.current = "Haar"
+<HaarWindow>:
+    name: "Haar"
+    
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Label:
+            text: "Haar Screen"
+            font_size: 32
+            
+        Button:
+            text: "Next Screen"
+            font_size: 32
+            on_release: app.root.current = "Retina"
+<RetinaWindow>:
+    name: "Retina"
+    
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Label:
+            text: "Retina Screen"
+            font_size: 32
+            
+        Button:
+            text: "Next Screen"
+            font_size: 32
+            on_release:
+                app.root.current = "Main"
+                root.manager.transition.direction = "right"
