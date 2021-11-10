@@ -2,7 +2,7 @@
 WindowManager:
     MainWindow:
     HelpWindow:
-    MTCNNWindow:
+    SingleImageWindow:
     HaarWindow:
     RetinaWindow:
 
@@ -64,21 +64,30 @@ WindowManager:
         Button:
             text: "Next Screen"
             font_size: 32
-            on_release: app.root.current = "MTCNN"
-<MTCNNWindow>:
-    name: "MTCNN"
-    
+            on_release: app.root.current = "SingleImage"
+<SingleImageWindow>:
+    name: "SingleImage"
+    id: my_widget
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
-        Label:
-            text: "MTCNN Screen"
-            font_size: 32
+
+        padding: 50
+        spacing: 20
+
+        Image:
+            id: my_image
+            source: ""
+
+        FileChooserListView:
+            id: filechooser
+            on_selection: my_widget.selected(filechooser.selection)
             
         Button:
             text: "Next Screen"
             font_size: 32
             on_release: app.root.current = "Haar"
+        
 <HaarWindow>:
     name: "Haar"
     

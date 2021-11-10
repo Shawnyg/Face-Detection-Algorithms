@@ -15,8 +15,12 @@ class MainWindow(Screen):
 class HelpWindow(Screen):
     pass
 
-class MTCNNWindow(Screen):
-    pass
+class SingleImageWindow(Screen):
+    def selected(self, filename):
+        try:
+            self.ids.my_image.source = filename[0]
+        except:
+            pass
 
 class HaarWindow(Screen):
     pass
