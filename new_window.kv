@@ -3,8 +3,8 @@ WindowManager:
     MainWindow:
     HelpWindow:
     SingleImageWindow:
-    HaarWindow:
-    RetinaWindow:
+    LiveWindow:
+    FolderWindow:
 
 <MainWindow>:
 
@@ -46,8 +46,16 @@ WindowManager:
             background_normal: ''
 
             on_release:
-                app.root.current = "Help"
+                if spinner_id2.text == "Single Image": \
+                app.root.current = "SingleImage"
                 root.manager.transition.direction = "left"
+                if spinner_id2.text == "Folder of Images": \
+                app.root.current = "Folder"
+                root.manager.transition.direction = "left"
+                if spinner_id2.text == "Live": \
+                app.root.current = "Live"
+                root.manager.transition.direction = "left"
+                
 
 
 <HelpWindow>:
@@ -74,6 +82,10 @@ WindowManager:
 
         padding: 50
         spacing: 20
+        Label:
+            id: imgPathLabel
+            text: "Select an image"
+            font_size: 32
 
         Image:
             id: my_image
@@ -87,34 +99,37 @@ WindowManager:
             text: "Next Screen"
             font_size: 32
             on_release: app.root.current = "Haar"
-        
-<HaarWindow>:
-    name: "Haar"
-    
+<FolderWindow>:
+    name: "Folder"
+    id: my_widget
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
+
+        padding: 50
+        spacing: 20
+
         Label:
-            text: "Haar Screen"
+            id: dirLabel
+            text: "Select a directory with the images"
             font_size: 32
+
+        FileChooserListView:
+            id: folderchooser
+            dirselect: True
+            on_selection: dirLabel.text = "Directory: " + folderchooser.selection[0]
             
         Button:
             text: "Next Screen"
             font_size: 32
-            on_release: app.root.current = "Retina"
-<RetinaWindow>:
-    name: "Retina"
-    
+            on_release: app.root.current = "Haar"
+<LiveWindow>:
+    name: "Live"
+    id: my_widget
     BoxLayout:
         orientation: "vertical"
         size: root.width, root.height
+
         Label:
-            text: "Retina Screen"
+            text: "Live screen will be here..."
             font_size: 32
-            
-        Button:
-            text: "Next Screen"
-            font_size: 32
-            on_release:
-                app.root.current = "Main"
-                root.manager.transition.direction = "right"

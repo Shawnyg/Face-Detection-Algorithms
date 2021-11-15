@@ -19,15 +19,16 @@ class SingleImageWindow(Screen):
     def selected(self, filename):
         try:
             self.ids.my_image.source = filename[0]
+            self.ids.imgPathLabel.text = "Image path: " + filename[0]
         except:
             pass
 
-class HaarWindow(Screen):
+class FolderWindow(Screen):
     pass
 
 
 
-class RetinaWindow(Screen):
+class LiveWindow(Screen):
     pass
 
 class WindowManager(ScreenManager):
